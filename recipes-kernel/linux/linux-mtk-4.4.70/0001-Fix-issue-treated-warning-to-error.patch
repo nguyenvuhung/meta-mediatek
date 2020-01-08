@@ -1,0 +1,25 @@
+From d88f8572d81829be71b1bb2de19a79c3a1e458d0 Mon Sep 17 00:00:00 2001
+From: hungnv9 <hungnv9@vng.com.vn>
+Date: Sat, 4 Jan 2020 20:02:50 +0000
+Subject: [PATCH] Fix issue treated warning to error
+
+---
+ crypto/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/crypto/Makefile b/crypto/Makefile
+index 63a9b4c..fa068f9 100644
+--- a/crypto/Makefile
++++ b/crypto/Makefile
+@@ -2,7 +2,7 @@
+ # Cryptographic API
+ #
+ 
+-subdir-ccflags-y += -Werror
++subdir-ccflags-y += 
+ 
+ obj-$(CONFIG_CRYPTO) += crypto.o
+ crypto-y := api.o cipher.o compress.o memneq.o
+-- 
+2.7.4
+

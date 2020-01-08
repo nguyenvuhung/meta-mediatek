@@ -17,6 +17,11 @@ SRC_URI_append_mt7623-evb = " \
 	file://update.sh \
     "
 
+SRC_URI_append_mt7623-bpi-r2_dev = " \
+	file://sw-description \
+	file://update.sh \
+    "
+
 IMAGE_FSTYPES = "tar.gz"
 
 # IMAGE_DEPENDS: list of Yocto images that contains a root filesystem
