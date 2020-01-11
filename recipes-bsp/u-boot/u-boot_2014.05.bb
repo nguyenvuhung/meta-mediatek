@@ -17,7 +17,7 @@ LICENSE = "GPLv2+"
 # MT7623 SDK
 SRCREV = "e4b87e5b1d026bd010e2ba3abbf89561e8320287"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=025bf9f768cbcb1a165dbe1a110babfb"
-PV = "2014.04"
+PV = "2014.05"
 
 include u-boot-mtk.inc
 require recipes-bsp/u-boot/u-boot.inc
