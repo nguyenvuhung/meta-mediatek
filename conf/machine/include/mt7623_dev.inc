@@ -10,7 +10,7 @@ DEFAULTTUNE ?= "cortexa7t-neon-vfpv4"
 require conf/machine/include/tune-cortexa7.inc
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-mtk"
-PREFERRED_VERSION_linux-mtk = "4.4%"
+PREFERRED_VERSION_linux-mtk = "4.14%"
 LINUX_VERSION_EXTENSION ?= "-mt7623"
 
 KERNEL_IMAGETYPE ?= "zImage"
