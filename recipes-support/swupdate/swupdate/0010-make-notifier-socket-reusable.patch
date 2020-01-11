@@ -1,24 +1,37 @@
---- a/core/notifier.c	2018-04-24 09:54:47.982908811 -0700
-+++ b/core/notifier.c	2018-04-24 09:55:36.415430532 -0700
-@@ -227,6 +227,7 @@ static void *notifier_thread (void __att
- {
+From 12b189f248fcd59a876f9acf93622d29d2794f40 Mon Sep 17 00:00:00 2001
+From: hungnv9 <hungnv9@vng.com.vn>
+Date: Thu, 9 Jan 2020 22:28:12 +0700
+Subject: [PATCH] make notifier socket reusable
+
+---
+ core/notifier.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/core/notifier.c b/core/notifier.c
+index 8643c6f..204a893 100644
+--- a/core/notifier.c
++++ b/core/notifier.c
+@@ -260,6 +260,7 @@ static void *notifier_thread (void __attribute__ ((__unused__)) *data)
  	int serverfd;
  	int len;
+ 	int attempt = 0;
 +	int sock_optval = 1;
  	struct notify_ipc_msg msg;
-
+ 
  	/* Initialize and bind to UDS */
-@@ -236,6 +237,13 @@ static void *notifier_thread (void __att
+@@ -269,6 +270,12 @@ static void *notifier_thread (void __attribute__ ((__unused__)) *data)
  		exit(2);
  	}
-
+ 
 +	if ((setsockopt(serverfd, SOL_SOCKET, SO_REUSEADDR,
 +					 &sock_optval, sizeof(sock_optval))) < 0) {
 +		TRACE("Error setting socket options: %s", strerror(errno));
 +		close(serverfd);
 +		exit(2);
 +	}
-+
- 	if (bind(serverfd, (const struct sockaddr *) &notify_server,
- 			sizeof(struct sockaddr_un)) < 0) {
- 		fprintf(stderr, "Error binding notifier socket: %s, exiting.\n", strerror(errno));
+ #if defined(__FreeBSD__)
+ 	setup_socket_cleanup(&notify_server);
+ #endif
+-- 
+2.7.4
+

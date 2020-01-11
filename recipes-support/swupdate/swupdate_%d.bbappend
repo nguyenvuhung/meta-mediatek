@@ -11,7 +11,6 @@ SRC_URI += "\
 	file://head_bg.gif \
 	file://swupdate.cfg \
 	file://swupdate.default \
-	file://suid.patch \
 	file://0010-make-notifier-socket-reusable.patch \
 "
 
