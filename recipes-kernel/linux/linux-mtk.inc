@@ -25,6 +25,7 @@ SRC_URI_append_mt7623 = " \
 	file://0110-fix-mtk-spi-read.patch \
 	file://0400-iommu.patch \
 	file://0500-mt7623a-disable-scpsys_mfg-clk.patch \
+	file://0002-WWAN-driver-Support-module-4G-EC25-of-quectel.patch \
 	"
 
 # BPI-R2 uses MT7623N chip, remove patch that's for MT7623A only
