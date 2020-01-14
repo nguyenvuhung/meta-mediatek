@@ -33,8 +33,16 @@ SRC_URI_remove_mt7623-bpi-r2 = " \
 	file://0500-mt7623a-disable-scpsys_mfg-clk.patch \
 	"
 
+SRC_URI_remove_mt7623-bpi-r2_dev = " \
+	file://0500-mt7623a-disable-scpsys_mfg-clk.patch \
+	"
+
 # BPI-R2 requires uImage with appended devicetree
 SRC_URI_append_mt7623-bpi-r2 = " \
+	file://defconfig-fragement-mt7623-bpi-r2.cfg \
+	"
+
+SRC_URI_append_mt7623-bpi-r2_dev = " \
 	file://defconfig-fragement-mt7623-bpi-r2.cfg \
 	"
 
@@ -53,12 +61,12 @@ DEPENDS += " lzop-native u-boot u-boot-mkimage-native"
 require recipes-kernel/linux/linux-yocto.inc
 KCONF_BSP_AUDIT_LEVEL = "0"
 
-COMPATIBLE_MACHINE = "(mt7623-evb|mt7623-bpi-r2)"
+COMPATIBLE_MACHINE = "(mt7623-evb|mt7623-bpi-r2|mt7623-bpi-r2_dev)"
 
 # BPI-R2 requires uImage (no idea why zImage doesn't work...)
 # Yocto's default uImage target does not append devicetree, so we strip the existing
 # uImage header, add the dtb file and re-create the uImage header:
-do_compile_append_mt7623-bpi-r2 () {
+do_compile_append () {
 	if [ ! `${STAGING_BINDIR_NATIVE}/uboot-mkimage -l ${B}/arch/${ARCH}/boot/uImage | grep "Image Name" | grep "dtb"`]; then
 		dd if=${B}/arch/${ARCH}/boot/uImage of=${B}/arch/${ARCH}/boot/zImage bs=64 skip=1
 		cat ${B}/arch/${ARCH}/boot/zImage ${B}/arch/${ARCH}/boot/dts/${KERNEL_DEVICETREE} > ${B}/arch/${ARCH}/boot/zImage.dtb
@@ -67,3 +75,4 @@ do_compile_append_mt7623-bpi-r2 () {
 		rm ${B}/arch/${ARCH}/boot/zImage.dtb
 	fi
 }
+
