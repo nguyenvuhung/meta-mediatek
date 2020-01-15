@@ -1,7 +1,6 @@
 
 SRC_URI_append_mt7623 = " \
 	file://mt7623a-rfb-emmc.dts \
-	file://mt7623n-bananapi-bpi-r2.dts \
 	\
 	file://0006-reset-mediatek-mt2701-reset-driver.patch \
 	file://0012-clk-dont-disable-unused-clocks.patch \
@@ -26,7 +25,8 @@ SRC_URI_append_mt7623 = " \
 	file://0400-iommu.patch \
 	file://0500-mt7623a-disable-scpsys_mfg-clk.patch \
 	file://0002-WWAN-driver-Support-module-4G-EC25-of-quectel.patch \
-        file://0001-Support-USB-2.0-OTG-and-enable-GPIO-34-to-1-by-using.patch \
+    file://0001-Support-USB-2.0-OTG-and-enable-GPIO-34-to-1-by-using.patch \
+	file://0001-Fix-issue-build-error.patch \
 	"
 
 # BPI-R2 uses MT7623N chip, remove patch that's for MT7623A only

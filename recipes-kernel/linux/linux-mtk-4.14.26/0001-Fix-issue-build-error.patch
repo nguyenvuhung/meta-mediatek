@@ -1,0 +1,141 @@
+From 83cdefed742f5bb9e154b3f45dd45d481dc5d386 Mon Sep 17 00:00:00 2001
+From: hungnv9 <hungnv9@vng.com.vn>
+Date: Wed, 15 Jan 2020 23:24:36 +0700
+Subject: [PATCH] Fix issue build error
+
+---
+ .../misc/mediatek/usb20/mt2701/usb20_phy_debugfs.c |  8 +--
+ drivers/misc/mediatek/usb20/musb_debugfs.c         |  2 +-
+ include/linux/wakelock.h                           | 67 ++++++++++++++++++++++
+ 3 files changed, 72 insertions(+), 5 deletions(-)
+ create mode 100644 include/linux/wakelock.h
+
+diff --git a/drivers/misc/mediatek/usb20/mt2701/usb20_phy_debugfs.c b/drivers/misc/mediatek/usb20/mt2701/usb20_phy_debugfs.c
+index 0e1bcd7..6abc3bc 100644
+--- a/drivers/misc/mediatek/usb20/mt2701/usb20_phy_debugfs.c
++++ b/drivers/misc/mediatek/usb20/mt2701/usb20_phy_debugfs.c
+@@ -257,7 +257,7 @@ static ssize_t rg_usb20_term_vref_sel_write(struct file *file,
+ 
+ 	memset(buf, 0x00, sizeof(buf));
+ 
+-	if (copy_from_user(&buf, ubuf, min_t(size_t, sizeof(buf) - 1, count)))
++	if (raw_copy_from_user(&buf, ubuf, min_t(size_t, sizeof(buf) - 1, count)))
+ 		return -EFAULT;
+ 	usb20_phy_debugfs_write_width3(OFFSET_RG_USB20_TERM_VREF_SEL, SHFT_RG_USB20_TERM_VREF_SEL,
+ 				       buf);
+@@ -271,7 +271,7 @@ static ssize_t rg_usb20_hstx_srctrl_write(struct file *file,
+ 
+ 	memset(buf, 0x00, sizeof(buf));
+ 
+-	if (copy_from_user(&buf, ubuf, min_t(size_t, sizeof(buf) - 1, count)))
++	if (raw_copy_from_user(&buf, ubuf, min_t(size_t, sizeof(buf) - 1, count)))
+ 		return -EFAULT;
+ 	usb20_phy_debugfs_write_width3(OFFSET_RG_USB20_HSTX_SRCTRL, SHFT_RG_USB20_HSTX_SRCTRL, buf);
+ 	return count;
+@@ -284,7 +284,7 @@ static ssize_t rg_usb20_vrt_vref_sel_write(struct file *file,
+ 
+ 	memset(buf, 0x00, sizeof(buf));
+ 
+-	if (copy_from_user(&buf, ubuf, min_t(size_t, sizeof(buf) - 1, count)))
++	if (raw_copy_from_user(&buf, ubuf, min_t(size_t, sizeof(buf) - 1, count)))
+ 		return -EFAULT;
+ 	usb20_phy_debugfs_write_width3(OFFSET_RG_USB20_VRT_VREF_SEL, SHFT_RG_USB20_VRT_VREF_SEL,
+ 				       buf);
+@@ -298,7 +298,7 @@ static ssize_t rg_usb20_intr_en_write(struct file *file,
+ 
+ 	memset(buf, 0x00, sizeof(buf));
+ 
+-	if (copy_from_user(&buf, ubuf, min_t(size_t, sizeof(buf) - 1, count)))
++	if (raw_copy_from_user(&buf, ubuf, min_t(size_t, sizeof(buf) - 1, count)))
+ 		return -EFAULT;
+ 	usb20_phy_debugfs_write_width1(OFFSET_RG_USB20_INTR_EN, SHFT_RG_USB20_INTR_EN, buf);
+ 	return count;
+diff --git a/drivers/misc/mediatek/usb20/musb_debugfs.c b/drivers/misc/mediatek/usb20/musb_debugfs.c
+index f86b002..5d8a4aa 100644
+--- a/drivers/misc/mediatek/usb20/musb_debugfs.c
++++ b/drivers/misc/mediatek/usb20/musb_debugfs.c
+@@ -193,7 +193,7 @@ static ssize_t musb_test_mode_write(struct file *file,
+ 
+ 	memset(buf, 0x00, sizeof(buf));
+ 
+-	if (copy_from_user(&buf, ubuf, min_t(size_t, sizeof(buf) - 1, count)))
++	if (raw_copy_from_user(&buf, ubuf, min_t(size_t, sizeof(buf) - 1, count)))
+ 		return -EFAULT;
+ 
+ 	if (!strncmp(buf, "force host", 9))
+diff --git a/include/linux/wakelock.h b/include/linux/wakelock.h
+new file mode 100644
+index 0000000..f4a698a
+--- /dev/null
++++ b/include/linux/wakelock.h
+@@ -0,0 +1,67 @@
++/* include/linux/wakelock.h
++ *
++ * Copyright (C) 2007-2012 Google, Inc.
++ *
++ * This software is licensed under the terms of the GNU General Public
++ * License version 2, as published by the Free Software Foundation, and
++ * may be copied, distributed, and modified under those terms.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ */
++
++#ifndef _LINUX_WAKELOCK_H
++#define _LINUX_WAKELOCK_H
++
++#include <linux/ktime.h>
++#include <linux/device.h>
++
++/* A wake_lock prevents the system from entering suspend or other low power
++ * states when active. If the type is set to WAKE_LOCK_SUSPEND, the wake_lock
++ * prevents a full system suspend.
++ */
++
++enum {
++	WAKE_LOCK_SUSPEND, /* Prevent suspend */
++	WAKE_LOCK_TYPE_COUNT
++};
++
++struct wake_lock {
++	struct wakeup_source ws;
++};
++
++static inline void wake_lock_init(struct wake_lock *lock, int type,
++				  const char *name)
++{
++	wakeup_source_init(&lock->ws, name);
++}
++
++static inline void wake_lock_destroy(struct wake_lock *lock)
++{
++	wakeup_source_trash(&lock->ws);
++}
++
++static inline void wake_lock(struct wake_lock *lock)
++{
++	__pm_stay_awake(&lock->ws);
++}
++
++static inline void wake_lock_timeout(struct wake_lock *lock, long timeout)
++{
++	__pm_wakeup_event(&lock->ws, jiffies_to_msecs(timeout));
++}
++
++static inline void wake_unlock(struct wake_lock *lock)
++{
++	__pm_relax(&lock->ws);
++}
++
++static inline int wake_lock_active(struct wake_lock *lock)
++{
++	return lock->ws.active;
++}
++
++#endif
+-- 
+2.7.4
+
