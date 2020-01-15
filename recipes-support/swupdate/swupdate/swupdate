@@ -69,7 +69,7 @@ do_start() {
 
 		cd /home/root
 		echo "Starting $DESC for ${hardware}..."
-		exec $DAEMON -H ${hardware}:1.0 -f /etc/swupdate.cfg $SWUPDATE_EXTRA_ARGS $SURICATTA_ARGS -w "" &
+		exec $DAEMON -H ${hardware}:1.0 -f /etc/swupdate.cfg $SWUPDATE_EXTRA_ARGS $SURICATTA_ARGS -w "" -p 'reboot' &
 		exit 0
 		;;
 	esac
