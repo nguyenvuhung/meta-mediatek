@@ -10,7 +10,7 @@ MTK_IMAGE_FILEDIR_mt7623-bpi-r2_dev := "${THISDIR}"
 # base image, change if required:
 require recipes-core/images/core-image-minimal.bb
 
-IMAGE_FEATURES += "package-management"
+#IMAGE_FEATURES += "package-management"
 IMAGE_LINGUAS = "en-us"
 
 inherit image
@@ -128,17 +128,17 @@ IMAGE_INSTALL += " \
     ${VNG_IOT} \
 "
 
-set_local_timezone() {
-    ln -sf /usr/share/zoneinfo/EST5EDT ${IMAGE_ROOTFS}/etc/localtime
-}
+#set_local_timezone() {
+#    ln -sf /usr/share/zoneinfo/EST5EDT ${IMAGE_ROOTFS}/etc/localtime
+#}
 
 #disable_bootlogd() {
 #    echo BOOTLOGD_ENABLE=no > ${IMAGE_ROOTFS}/etc/default/bootlogd
 #}
 
-ROOTFS_POSTPROCESS_COMMAND += " \
-    set_local_timezone ; \
-"
+#ROOTFS_POSTPROCESS_COMMAND += " \
+#    set_local_timezone ; \
+#"
 
 export IMAGE_BASENAME = "console-image-mtk"
 

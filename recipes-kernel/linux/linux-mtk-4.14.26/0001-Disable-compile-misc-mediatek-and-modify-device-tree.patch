@@ -1,0 +1,123 @@
+From 7deb4f306dc03e0761542ffc93374eea01a0c9f3 Mon Sep 17 00:00:00 2001
+From: hungnv9 <hungnv9@vng.com.vn>
+Date: Thu, 16 Jan 2020 12:17:28 +0700
+Subject: [PATCH] Disable compile misc/mediatek and modify device tree add usb0
+ node
+
+---
+ arch/arm/boot/dts/mt7623n-bananapi-bpi-r2.dts | 58 ++++++++++++++++++++++++++-
+ drivers/misc/Kconfig                          |  2 +-
+ drivers/misc/Makefile                         |  2 +-
+ 3 files changed, 59 insertions(+), 3 deletions(-)
+
+diff --git a/arch/arm/boot/dts/mt7623n-bananapi-bpi-r2.dts b/arch/arm/boot/dts/mt7623n-bananapi-bpi-r2.dts
+index 12b6f5a..71034e2 100644
+--- a/arch/arm/boot/dts/mt7623n-bananapi-bpi-r2.dts
++++ b/arch/arm/boot/dts/mt7623n-bananapi-bpi-r2.dts
+@@ -217,6 +217,7 @@
+ 
+ 	gmac0: mac@0 {
+ 		compatible = "mediatek,eth-mac";
++		mac-address = [00 11 22 33 44 55]; 
+ 		reg = <0>;
+ 		phy-mode = "trgmii";
+ 
+@@ -527,7 +528,41 @@
+ 			bias-disable;
+ 		};
+ 	};
++	usb_iddig: iddig_irq_init{
++		pins_cmd_dat {
++			pinmux = <MT7623_PIN_44_NCEB1_FUNC_GPIO44>;
++			bias-pull-up ;
++		};
++	};
++
++	usb_drvvbus: drvvbus_init{
++		pins_cmd_dat {
++			pinmux = <MT7623_PIN_237_EXT_SDIO2_FUNC_GPIO237>;
++			output-low;
++		};
++	};
++
++	usb_drvvbus_low: drvvbus_low{
++		pins_cmd_dat {
++			pinmux = <MT7623_PIN_237_EXT_SDIO2_FUNC_GPIO237>;
++			slew-rate = <1>;
++			output-low;
++		};
++	};
+ 
++	usb_drvvbus_high: drvvbus_high{
++		pins_cmd_dat {
++			pinmux = <MT7623_PIN_237_EXT_SDIO2_FUNC_GPIO237>;
++			output-high;
++		};
++	};
++	
++	usb_idpullup_high: idpullup_high{
++		pins_cmd_dat {
++			pinmux = <MT7623_PIN_34_I2S1_DATA_IN_FUNC_GPIO34>;
++			output-high;
++		};
++	};
+ 	pwm_pins_a: pwm@0 {
+ 		pins_pwm {
+ 			pinmux = <MT7623_PIN_203_PWM0_FUNC_PWM0>,
+@@ -625,7 +660,28 @@
+ &uart2 {
+ 	status = "okay";
+ };
+-
++&usb0 {
++	pinctrl-names = "iddig_irq_init", "drvvbus_init",
++			"drvvbus_low", "drvvbus_high", "idpullup_high";
++	pinctrl-0 = <&usb_iddig>;
++	pinctrl-1 = <&usb_drvvbus>;
++	pinctrl-2 = <&usb_drvvbus_low>;
++	pinctrl-3 = <&usb_drvvbus_high>;
++	pinctrl-4 = <&usb_idpullup_high>;
++	status = "okay";
++	drvvbus_gpio = <&pio 237 0>;
++	idpullup_gpio = <&pio 34 1>;
++	otg-iddig{
++		iddig_gpio = <&pio 44 0>;
++		interrupt-parent = <&pio>;
++		interrupts = <26 IRQ_TYPE_LEVEL_LOW>;
++	};
++	vbus-detect{
++		vbus_gpio = <&pio 102 0>;
++		interrupt-parent = <&pio>;
++		interrupts = <75 IRQ_TYPE_LEVEL_HIGH>;
++	};
++};
+ &usb1 {
+ 	vusb33-supply = <&mt6323_vusb_reg>;
+ 	status = "okay";
+diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+index 11ef310..9d2621c 100644
+--- a/drivers/misc/Kconfig
++++ b/drivers/misc/Kconfig
+@@ -518,5 +518,5 @@ source "drivers/misc/mic/Kconfig"
+ source "drivers/misc/genwqe/Kconfig"
+ source "drivers/misc/echo/Kconfig"
+ source "drivers/misc/cxl/Kconfig"
+-source "drivers/misc/mediatek/Kconfig"
++#source "drivers/misc/mediatek/Kconfig"
+ endmenu
+diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
+index a3ba8b4..4173170 100644
+--- a/drivers/misc/Makefile
++++ b/drivers/misc/Makefile
+@@ -56,7 +56,7 @@ obj-$(CONFIG_CXL_BASE)		+= cxl/
+ obj-$(CONFIG_ASPEED_LPC_CTRL)	+= aspeed-lpc-ctrl.o
+ obj-$(CONFIG_ASPEED_LPC_SNOOP)	+= aspeed-lpc-snoop.o
+ obj-$(CONFIG_PCI_ENDPOINT_TEST)	+= pci_endpoint_test.o
+-obj-$(CONFIG_ARCH_MEDIATEK) += mediatek/
++#obj-$(CONFIG_ARCH_MEDIATEK) += mediatek/
+ 
+ lkdtm-$(CONFIG_LKDTM)		+= lkdtm_core.o
+ lkdtm-$(CONFIG_LKDTM)		+= lkdtm_bugs.o
+-- 
+2.7.4
+

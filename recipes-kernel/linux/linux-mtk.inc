@@ -27,6 +27,7 @@ SRC_URI_append_mt7623 = " \
 	file://0002-WWAN-driver-Support-module-4G-EC25-of-quectel.patch \
     file://0001-Support-USB-2.0-OTG-and-enable-GPIO-34-to-1-by-using.patch \
 	file://0001-Fix-issue-build-error.patch \
+	file://0001-Disable-compile-misc-mediatek-and-modify-device-tree.patch \
 	"
 
 # BPI-R2 uses MT7623N chip, remove patch that's for MT7623A only
@@ -52,9 +53,9 @@ SRC_URI_append_mt7623-evb = " \
 	"
 
 # copy our own devicetree files to kernel source directory
-do_configure_prepend_mt7623 () {
-	cp ${B}/../*.dts ${S}/arch/arm/boot/dts
-}
+#do_configure_prepend_mt7623 () {
+#	cp ${B}/../*.dts ${S}/arch/arm/boot/dts
+#}
 
 PROVIDES += " virtual/kernel"
 DEPENDS += " lzop-native u-boot u-boot-mkimage-native"
