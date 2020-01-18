@@ -1,0 +1,10 @@
+[Unit]
+Description=unmask networking service
+
+
+[Service]
+ExecStartPre=/bin/systemctl unmask networking.service
+ExecStart=/bin/systemctl restart networking.service
+
+[Install]
+WantedBy=multi-user.target
