@@ -57,4 +57,4 @@ FILES_${PN} = " \
 "
 
 # Autoload lte-trigger module
-#KERNEL_MODULE_AUTOLOAD = " lte-trigger"
+KERNEL_MODULE_AUTOLOAD = " lte-trigger"
