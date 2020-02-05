@@ -105,6 +105,10 @@ FEATURES_DHCP = " \
     net-snmp \
 "
 
+FEATURES_GRAPHIC = " \
+    mesa-demos \
+"
+
 #DISTRO_FEATURES_append += " bluez5 bluetooth wifi"
 IMAGE_INSTALL_append = " \
     ${MY_APPQT} \
@@ -117,4 +121,6 @@ IMAGE_INSTALL_append = " \
     ${FEATURES_MQTT} \
     ${FEATURES_NET} \
     ${FEATURES_DHCP} \
+    ${FEATURES_GRAPHIC} \
 "
+#CORE_IMAGE_EXTRA_INSTALL += "packagegroup-core-tools-testapps"
