@@ -1,0 +1,45 @@
+#!/bin/sh
+DESC="LTE service for module 4G"
+NAME="lte_enable"
+DAEMON=/usr/bin/quectel-cm
+PIDFILE=/var/run/$NAME.pid
+
+. /etc/init.d/functions || exit 1
+
+# Exit if the package is not installed
+[ -x "$DAEMON" ] || exit 0
+
+# Read configuration variable file if it is present
+[ -r /etc/default/$NAME ] && . /etc/default/$NAME
+
+#
+# Function that starts the daemon/service
+#
+do_start() {
+	local status pid
+
+	status=0
+	pid=`pidof $NAME` || status=$?
+	case $status in
+	0)
+		echo "$DESC already running ($pid)."
+		exit 1
+		;;
+	*)
+		cd /home/root
+		echo "Starting $DESC...................."
+		exec $DAEMON -s ctnet &
+		exit 0
+		;;
+	esac
+}
+
+case "$1" in
+start)
+	do_start
+	;;
+*)
+	echo "Usage: $0 {start|stop|status|restart|try-restart|force-reload}" >&2
+	exit 3
+	;;
+esac

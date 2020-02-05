@@ -1,0 +1,10 @@
+[Unit]
+Description=LTE service
+BindsTo=dev-wdm0.device                                                                     
+After=dev-wdm0.device 
+
+[Service]
+ExecStart=/usr/bin/quectel-cm -s ctnet
+
+[Install]
+WantedBy=multi-user.target

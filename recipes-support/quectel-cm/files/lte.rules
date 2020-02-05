@@ -1,0 +1,1 @@
+ACTION=="add", KERNEL=="cdc-wdm0",SYMLINK+="wdm0",  SUBSYSTEM=="usbmisc", TAG+="systemd", ENV{SYSTEMD_WANTS}+="lte.service"
