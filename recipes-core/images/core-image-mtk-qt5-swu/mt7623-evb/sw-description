@@ -2,12 +2,12 @@ software =
 {
 	version = "0.1.0";
 
-	mt7623-bpi-r2 = {
+	mt7623-evb = {
 		hardware-compatibility: [ "1.0" ];
 
 		files: (
 			{
-				filename = "qt5-my-image-mt7623-bpi-r2.tar.gz";
+				filename = "core-image-mtk-mt7623-evb.tar.gz";
 				type = "archive";
 				compressed = true;
 				device = "/dev/update";

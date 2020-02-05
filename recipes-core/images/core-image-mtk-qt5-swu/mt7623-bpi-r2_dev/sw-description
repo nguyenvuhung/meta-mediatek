@@ -7,7 +7,7 @@ software =
 
 		files: (
 			{
-				filename = "qt5-my-image-mt7623-bpi-r2.tar.gz";
+				filename = "core-image-mtk-qt5-mt7623-bpi-r2.tar.gz";
 				type = "archive";
 				compressed = true;
 				device = "/dev/update";
