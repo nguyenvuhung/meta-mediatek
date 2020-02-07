@@ -11,8 +11,7 @@ SRC_URI += "\
 	file://head_bg.gif \
 	file://swupdate.cfg \
 	file://swupdate.default \
-	file://suid.patch \
-	file://0010-make-notifier-socket-reusable.patch \
+	file://0001-make-notifier-socket-reusable.patch \
 "
 
 # original swupdate bb file only sets 'DEPENDS' variable, but not 'RDEPENDS'

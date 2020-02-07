@@ -42,8 +42,8 @@ do_install () {
     install -m 0755 ${S}/quectel-cm ${D}${bindir}
 
         # Configure for sysinit
-#    install -d ${D}/${sysconfdir}/init.d
-#    install -m 755 ${WORKDIR}/lte_enable ${D}${sysconfdir}/init.d
+    install -d ${D}/${sysconfdir}/init.d
+    install -m 755 ${WORKDIR}/lte_enable ${D}${sysconfdir}/init.d
 
 
     install -d ${D}${systemd_unitdir}/system
