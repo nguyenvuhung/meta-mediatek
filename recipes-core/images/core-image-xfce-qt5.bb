@@ -2,7 +2,7 @@ SUMMARY = "The minimal image that can run Qt5 applications"
 LICENSE = "MIT"
 
 # Pulled from a mix of different images:
-include recipes-core/images/core-image-mtk.bb
+include recipes-core/images/core-image-xfce.bb
 # This image is a little more full featured, and includes wifi
 # support, provided you have a raspberrypi3
 
