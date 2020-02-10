@@ -21,5 +21,6 @@ CORE_IMAGE_EXTRA_INSTALL += " \
 # Kernel modules using set GPIO 34 to 1 for LTE module use 14 Pin header
 IMAGE_INSTALL_append = " \
     kernel-module-lte-trigger \
+    kernel-module-dwav-usb-mt \
 "
 
