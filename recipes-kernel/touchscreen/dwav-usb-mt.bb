@@ -56,5 +56,5 @@ FILES_${PN} = " \
     /lib/modules/${KERNEL_VERSION}/extra/${MODULE_NAME}.ko \
 "
 
-# Autoload lte-trigger module
+# Autoload dwav-usb-mt module
 KERNEL_MODULE_AUTOLOAD = " dwav-usb-mt"
