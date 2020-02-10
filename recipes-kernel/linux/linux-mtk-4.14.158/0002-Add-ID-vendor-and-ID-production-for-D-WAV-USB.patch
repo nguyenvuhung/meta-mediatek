@@ -1,0 +1,37 @@
+From b81956e2b90801046bc2e23d275b06440e7cc81e Mon Sep 17 00:00:00 2001
+From: Nguyen Vu Hung <hungnv9@vng.com.vn>
+Date: Mon, 10 Feb 2020 10:34:18 +0000
+Subject: [PATCH 2/2] Add ID vendor and ID production for D-WAV USB
+
+---
+ drivers/hid/hid-core.c | 1 +
+ drivers/hid/hid-ids.h  | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/drivers/hid/hid-core.c b/drivers/hid/hid-core.c
+index 2d089d3..76b5872 100644
+--- a/drivers/hid/hid-core.c
++++ b/drivers/hid/hid-core.c
+@@ -2843,6 +2843,7 @@ static const struct hid_device_id hid_ignore_list[] = {
+ 	{ HID_USB_DEVICE(USB_VENDOR_ID_SYNAPTICS, USB_DEVICE_ID_SYNAPTICS_DPAD) },
+ #endif
+ 	{ HID_USB_DEVICE(USB_VENDOR_ID_YEALINK, USB_DEVICE_ID_YEALINK_P1K_P4K_B2K) },
++	{ HID_USB_DEVICE(USB_VENDOR_ID_DWAV, USB_DEVICE_ID_DWAV_MULTITOUCH) },
+ 	{ }
+ };
+ 
+diff --git a/drivers/hid/hid-ids.h b/drivers/hid/hid-ids.h
+index 1e2e6e5..3fd2f18 100644
+--- a/drivers/hid/hid-ids.h
++++ b/drivers/hid/hid-ids.h
+@@ -351,6 +351,7 @@
+ #define USB_VENDOR_ID_DWAV		0x0eef
+ #define USB_DEVICE_ID_EGALAX_TOUCHCONTROLLER	0x0001
+ #define USB_DEVICE_ID_DWAV_TOUCHCONTROLLER	0x0002
++#define USB_DEVICE_ID_DWAV_MULTITOUCH       0x0005
+ #define USB_DEVICE_ID_DWAV_EGALAX_MULTITOUCH_480D	0x480d
+ #define USB_DEVICE_ID_DWAV_EGALAX_MULTITOUCH_480E	0x480e
+ #define USB_DEVICE_ID_DWAV_EGALAX_MULTITOUCH_7207	0x7207
+-- 
+2.7.4
+

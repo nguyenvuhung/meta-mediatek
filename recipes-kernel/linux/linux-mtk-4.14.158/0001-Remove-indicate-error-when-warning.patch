@@ -1,0 +1,22 @@
+From 99c1a5852b544392dc1db261d71b20b6b2952a0c Mon Sep 17 00:00:00 2001
+From: Nguyen Vu Hung <hungnv9@vng.com.vn>
+Date: Mon, 10 Feb 2020 10:32:19 +0000
+Subject: [PATCH 1/2] Remove indicate error when warning
+
+---
+ drivers/net/wireless/mediatek/mt76/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/net/wireless/mediatek/mt76/Makefile b/drivers/net/wireless/mediatek/mt76/Makefile
+index dfae4e6..30027b7 100644
+--- a/drivers/net/wireless/mediatek/mt76/Makefile
++++ b/drivers/net/wireless/mediatek/mt76/Makefile
+@@ -1,4 +1,4 @@
+-EXTRA_CFLAGS += -Werror
++EXTRA_CFLAGS +=
+ 
+ obj-m := mt76.o mt76x2e.o mt7603e.o
+ 
+-- 
+2.7.4
+

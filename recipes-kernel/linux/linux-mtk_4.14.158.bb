@@ -19,6 +19,8 @@ SRC_URI = " \
 SRC_URI_append = " \
 	file://defconfig \
 	file://0001-WWAN-driver-Support-module-4G-EC25-of-quectel.patch \
+	file://0001-Remove-indicate-error-when-warning.patch \
+	file://0002-Add-ID-vendor-and-ID-production-for-D-WAV-USB.patch \
 	"
 
 LINUX_VERSION ?= "4.14.158"
