@@ -110,6 +110,10 @@ FEATURES_GRAPHIC = " \
     mesa-demos \
 "
 
+VNG_PACKAGE = " \
+    boost \
+"
+
 #DISTRO_FEATURES_append += " bluez5 bluetooth wifi"
 IMAGE_INSTALL_append = " \
     ${MY_APPQT} \
@@ -123,5 +127,6 @@ IMAGE_INSTALL_append = " \
     ${FEATURES_NET} \
     ${FEATURES_DHCP} \
     ${FEATURES_GRAPHIC} \
+    ${VNG_PACKAGE} \
 "
 #CORE_IMAGE_EXTRA_INSTALL += "packagegroup-core-tools-testapps"
