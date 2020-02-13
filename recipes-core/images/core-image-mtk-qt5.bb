@@ -10,6 +10,8 @@ MY_APPQT = " \
     basicquick \
     qt5-opengles2-test \
     qtsmarthome \
+    qcolorcheck \
+    qshowfonts \
 "
 
 MY_TOOLS = " \
@@ -18,7 +20,21 @@ MY_TOOLS = " \
     qtbase-mkspecs \
     qtbase-plugins \
     qtbase-tools \
+    qt5-env \
 "
+
+FONTS = " \
+    fontconfig \
+    fontconfig-utils \
+    ttf-bitstream-vera \
+"
+
+TSLIB = " \
+    tslib \
+    tslib-calibrate \
+    tslib-conf \
+"
+
 MY_PKGS = " \
     qt3d \
     qt3d-dev \
@@ -37,6 +53,43 @@ MY_PKGS = " \
     qtgraphicaleffects \
     qtgraphicaleffects-dev \
 "
+
+DEV_SDK = " \
+    binutils \
+    binutils-symlinks \
+    coreutils \
+    cpp \
+    cpp-symlinks \
+    diffutils \
+    elfutils elfutils-binutils \
+    file \
+    gcc \
+    gcc-symlinks \
+    g++ \
+    g++-symlinks \
+    gdb \
+    gettext \
+    git \
+    ldd \
+    libstdc++ \
+    libstdc++-dev \
+    libtool \
+    ltrace \
+    make \
+    perl-modules \
+    pkgconfig \
+    python3-modules \
+    strace \
+    \
+    python-setuptools \
+    python-dateutil \
+    python-pip \
+    openssh-sftp \
+    openssh-sftp-server \
+    openssh openssh-keygen \
+    rsync \
+"
+
 EXTRA_TOOLS_INSTALL = " \
     bzip2 \
     curl \
@@ -107,7 +160,6 @@ FEATURES_DHCP = " \
 "
 
 FEATURES_GRAPHIC = " \
-    mesa-demos \
 "
 
 VNG_PACKAGE = " \
@@ -118,7 +170,10 @@ VNG_PACKAGE = " \
 IMAGE_INSTALL_append = " \
     ${MY_APPQT} \
     ${MY_TOOLS} \
+    ${FONTS} \
+    ${TSLIB} \
     ${MY_PKGS} \
+    ${DEV_SDK} \
     ${EXTRA_TOOLS_INSTALL} \
     ${USB_TOOLS} \ 
     ${FEATURES_DEBUG} \
