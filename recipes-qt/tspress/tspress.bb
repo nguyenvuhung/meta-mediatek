@@ -10,7 +10,8 @@ SRC_URI = "git://github.com/scottellis/tspress.git"
 
 S = "${WORKDIR}/git"
 
-require recipes-qt/qt5/qt5.inc
+# require recipes-qt/qt5/qt5.inc
+inherit qmake5
 
 do_install() {
     install -d ${D}${bindir}

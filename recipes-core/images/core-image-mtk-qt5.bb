@@ -12,6 +12,7 @@ MY_APPQT = " \
     qtsmarthome \
     qcolorcheck \
     qshowfonts \
+    tspress \
 "
 
 MY_TOOLS = " \
