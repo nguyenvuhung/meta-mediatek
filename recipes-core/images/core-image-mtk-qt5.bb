@@ -10,6 +10,8 @@ MY_APPQT = " \
     basicquick \
     qt5-opengles2-test \
     qtsmarthome \
+    cinematicexperience \
+    qt5everywheredemo \
     qcolorcheck \
     qshowfonts \
     tspress \
@@ -161,6 +163,7 @@ FEATURES_DHCP = " \
 "
 
 FEATURES_GRAPHIC = " \
+    mesa-demos \
 "
 
 VNG_PACKAGE = " \

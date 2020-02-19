@@ -25,9 +25,9 @@ iface lan1 inet manual
 
 auto lan2
 iface lan2 inet static
-    address 169.254.0.1
+    address 192.168.0.1
     netmask 255.255.255.0
-    network 169.254.0.2
+    network 192.168.0.2
 
 auto lan3
 iface lan3 inet static

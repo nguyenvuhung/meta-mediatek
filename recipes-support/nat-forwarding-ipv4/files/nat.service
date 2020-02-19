@@ -1,0 +1,9 @@
+[Unit]
+Description=NAT service                                                                    
+After=systemd-networkd.service
+
+[Service]
+ExecStart=/usr/bin/nat-forwarding-ipv4.sh
+
+[Install]
+WantedBy=multi-user.target
