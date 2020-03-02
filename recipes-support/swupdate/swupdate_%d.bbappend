@@ -12,10 +12,32 @@ SRC_URI += "\
 	file://swupdate.cfg \
 	file://swupdate.default \
 	file://0001-make-notifier-socket-reusable.patch \
+	file://11-suricatta_args \
 "
 
 # original swupdate bb file only sets 'DEPENDS' variable, but not 'RDEPENDS'
 RDEPENDS_${PN} += " u-boot-fw-utils e2fsprogs"
+
+python () {
+    try:
+        defconfig = bb.fetch2.localpath('file://defconfig', d)
+    except bb.fetch2.FetchError:
+        return
+
+    try:
+        configfile = open(defconfig)
+    except IOError:
+        return
+
+    features = configfile.readlines()
+    configfile.close()
+
+    if 'CONFIG_SURICATTA=y\n' in features:
+        d.setVar('SWUPDATE_SURICATTA', 'true')
+    else:
+        d.setVar('SWUPDATE_SURICATTA', 'false')
+
+}
 
 do_install_append () {
 	install -m 755 ${WORKDIR}/head_bg.gif ${D}/www/
@@ -26,4 +48,12 @@ do_install_append () {
 	# if required. Needs to match "hardware-compatibility" in swupdate's
 	# sw-description file
 	echo "${MACHINE} 1.0" > ${D}${sysconfdir}/hwrevision
+
+	    # shell based configuration loader allows to place code snippets into this folder
+    install -d ${D}${libdir}/swupdate/conf.d
+
+    if ${SWUPDATE_SURICATTA}; then
+        install -m 644 ${WORKDIR}/11-suricatta_args ${D}${libdir}/swupdate/conf.d/
+    fi
+
 }

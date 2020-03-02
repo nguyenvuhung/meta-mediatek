@@ -4,9 +4,11 @@ Documentation=https://github.com/sbabic/swupdate
 Documentation=https://sbabic.github.io/swupdate
 
 [Service]
-ExecStartPre=-/usr/bin/swupdate-env
-EnvironmentFile=-/tmp/swupdate.env
-ExecStart=/usr/bin/swupdate -v -f /etc/swupdate.cfg $SWUPDATE_EXTRA_ARGS $SURICATTA_ARGS -w "" -p 'reboot'
+#ExecStartPre=-/usr/bin/swupdate-env
+#EnvironmentFile=-/tmp/swupdate.env
+#ExecStart=/usr/bin/swupdate -l 5 -f /etc/swupdate.cfg -w "" -u '-u http://192.168.0.103:8080 -i ID1'
+ExecStart=/usr/lib/swupdate/swupdate.sh
+KillMode=mixed
 
 [Install]
 WantedBy=multi-user.target
