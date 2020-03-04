@@ -58,6 +58,7 @@ DEV_SDK = " \
     openssh-sftp-server \
     openssh openssh-keygen \
     rsync \
+    python-dev python3-rpm \
 "
 
 EXTRA_TOOLS_INSTALL = " \
