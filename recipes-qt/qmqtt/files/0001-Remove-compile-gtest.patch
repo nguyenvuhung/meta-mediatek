@@ -1,0 +1,25 @@
+From 7a20d5fe515f74fbc73145d15f96abe07e53a8a5 Mon Sep 17 00:00:00 2001
+From: Nguyen Vu Hung <hungnv9@vng.com.vn>
+Date: Tue, 10 Mar 2020 17:21:50 +0700
+Subject: [PATCH] Remove compile gtest
+
+---
+ tests/tests.pro | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tests/tests.pro b/tests/tests.pro
+index 8c9baa4..8fefc5f 100644
+--- a/tests/tests.pro
++++ b/tests/tests.pro
+@@ -2,7 +2,7 @@ TEMPLATE = subdirs
+ SUBDIRS += \
+     auto
+ 
+-unix:!NO_UNIT_TESTS: SUBDIRS += gtest
++unix:!NO_UNIT_TESTS: SUBDIRS +=
+ 
+ # benchmarks in debug mode is rarely sensible
+ contains(QT_CONFIG, release): SUBDIRS += benchmarks
+-- 
+2.7.4
+

@@ -7,6 +7,11 @@ DEPENDS += "qtbase"
 
 SRCREV = "66f65fc21d128bcb8ef02c02474863d2ad92acac"
 SRC_URI = "git://github.com/emqtt/qmqtt.git"
+           
+
+SRC_URI_append = " \
+    file://0001-Remove-compile-gtest.patch \
+" 
 
 S = "${WORKDIR}/git"
 
