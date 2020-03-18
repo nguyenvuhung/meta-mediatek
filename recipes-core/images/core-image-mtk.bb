@@ -25,5 +25,6 @@ CORE_IMAGE_EXTRA_INSTALL += " \
 IMAGE_INSTALL_append = " \
     kernel-module-lte-trigger \
     kernel-module-dwav-usb-mt \
+    createnewdirectory \
 "
 
