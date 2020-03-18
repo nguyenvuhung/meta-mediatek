@@ -41,10 +41,10 @@ static int __init lte_trigger_init(void){
    }
    // Going to set up the LED. It is a GPIO in output mode and will be on by default
    ledOn = true;
-   gpio_request(gpiopin, "sysfs");          // gpiopin is hardcoded to 49, request it
+   gpio_request(gpiopin, "sysfs");          // gpiopin is hardcoded to 266, request it
    gpio_direction_output(gpiopin, ledOn);   // Set the gpio to be in output mode and on
    gpio_set_value(gpiopin, 1);          // Not required as set by line above (here for reference)
-   gpio_export(gpiopin, false);             // Causes gpio49 to appear in /sys/class/gpio
+   gpio_export(gpiopin, false);             // Causes gpio266 to appear in /sys/class/gpio
 			                    // the bool argument prevents the direction from being changed
 
 // Perform a quick test to see that the button is working as expected on LKM load
