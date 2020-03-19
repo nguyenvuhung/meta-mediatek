@@ -156,7 +156,13 @@ QT5_App = " \
 			qt5-demo-extrafiles \
 			"
 
-#DISTRO_FEATURES_append += " bluez5 bluetooth wifi"
+MY_WIFI = " \
+    crda \
+    iw \
+    wpa-supplicant \
+"
+
+# DISTRO_FEATURES_append = " bluez5 bluetooth wifi"
 IMAGE_INSTALL_append = " \
     ${MY_APPQT} \
 	${MY_TOOLS} \
@@ -172,5 +178,6 @@ IMAGE_INSTALL_append = " \
     ${FEATURES_GRAPHIC} \
     ${VNG_PACKAGE} \
 	${QT5_App} \
+    ${MY_WIFI} \
 "
 #CORE_IMAGE_EXTRA_INSTALL += "packagegroup-core-tools-testapps"
