@@ -162,6 +162,14 @@ MY_WIFI = " \
     wpa-supplicant \
 "
 
+MY_TENSORFLOW = " \
+    tensorflow \
+"
+
+MY_FACEID = " \
+    face-detection \
+"
+
 # DISTRO_FEATURES_append = " bluez5 bluetooth wifi"
 IMAGE_INSTALL_append = " \
     ${MY_APPQT} \
@@ -179,5 +187,7 @@ IMAGE_INSTALL_append = " \
     ${VNG_PACKAGE} \
 	${QT5_App} \
     ${MY_WIFI} \
+    ${MY_TENSORFLOW} \
+    ${MY_FACEID} \
 "
 #CORE_IMAGE_EXTRA_INSTALL += "packagegroup-core-tools-testapps"
