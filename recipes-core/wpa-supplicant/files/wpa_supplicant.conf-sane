@@ -1,0 +1,20 @@
+ctrl_interface=/var/run/wpa_supplicant
+ctrl_interface_group=0
+update_config=1
+
+network={
+   ssid="Tenda_346E90"
+   #psk="12345678"
+   psk=8f83ed3dfe04bad52d12c054e4007b2871761e882630e3fe4f3361cd5d5864a5
+   proto=WPA2
+   key_mgmt=WPA-PSK
+   pairwise=CCMP
+   group=CCMP
+   
+}
+
+# open network
+#network={
+#    key_mgmt=NONE
+#    ssid="<ssid>"
+#}

@@ -53,4 +53,8 @@ iface br0 inet static
     bridge_fd 5                                                                                                                                                                                                                         
     bridge_stp no
 
+# Configure Wifi
+auto wlan0
+iface wlan0 inet dhcp
+
 nameserver 8.8.8.8

@@ -125,6 +125,7 @@ FEATURES_NET = " \
 FEATURES_DHCP = " \
     dhcp-server \ 
     dhcp-relay \
+    dhcp-client \
     libfile-slurp-perl \
     libhtml-parser-perl \
     net-snmp \
@@ -166,6 +167,7 @@ MY_APP_EXTRA = " \
     stp-uart-launcher \
     wmt-loopback \
     wmt-loader \
+    wifi-module \
 "
 
 # DISTRO_FEATURES_append = " bluez5 bluetooth wifi"

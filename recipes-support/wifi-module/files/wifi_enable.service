@@ -1,0 +1,9 @@
+[Unit]
+Description=Enable WIFI module service                                                                    
+After=systemd-networkd.service
+
+[Service]
+ExecStart=/usr/bin/wifi_enable.sh
+
+[Install]
+WantedBy=multi-user.target
