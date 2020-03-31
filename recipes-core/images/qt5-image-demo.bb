@@ -162,6 +162,12 @@ MY_WIFI = " \
     wpa-supplicant \
 "
 
+MY_APP_EXTRA = " \
+    stp-uart-launcher \
+    wmt-loopback \
+    wmt-loader \
+"
+
 # DISTRO_FEATURES_append = " bluez5 bluetooth wifi"
 IMAGE_INSTALL_append = " \
     ${MY_APPQT} \
@@ -177,7 +183,8 @@ IMAGE_INSTALL_append = " \
     ${FEATURES_DHCP} \
     ${FEATURES_GRAPHIC} \
     ${VNG_PACKAGE} \
-	${QT5_App} \
+    ${QT5_App} \
     ${MY_WIFI} \
+    ${MY_APP_EXTRA} \
 "
 #CORE_IMAGE_EXTRA_INSTALL += "packagegroup-core-tools-testapps"
