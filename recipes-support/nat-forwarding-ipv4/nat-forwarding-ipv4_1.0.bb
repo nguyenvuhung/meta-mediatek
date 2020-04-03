@@ -11,6 +11,8 @@ SRC_URI_append = " \
 	file://nat-forwarding-ipv4.sh \
 	"
 
+DEPENDS += " iptables"
+
 do_install () {
     # create the /usr/bin folder in the rootfs give it default permissions
     install -d ${D}${bindir}
