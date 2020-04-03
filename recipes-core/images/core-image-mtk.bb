@@ -21,10 +21,22 @@ CORE_IMAGE_EXTRA_INSTALL += " \
     "
 
 # Kernel modules using set GPIO 34 to 1 for LTE module use 14 Pin header
-# And Add toughscreen module for board
 IMAGE_INSTALL_append = " \
     kernel-module-lte-trigger \
-    kernel-module-dwav-usb-mt \
-    createnewdirectory \
 "
+
+# Create new directory for rootfs
+IMAGE_INSTALL_append += " createnewdirectory"
+
+# Add toughscreen module
+IMAGE_INSTALL_append += " kernel-module-dwav-usb-mt"
+
+# Add app quectel_cm for start 4G module EC25E
+IMAGE_INSTALL_append += " quectel-cm"
+
+# unmask networking because yocto default mask networking the first
+IMAGE_INSTALL_append += " systemd-systemctl"
+
+# Enable NAT forwarding on wwan0
+IMAGE_INSTALL_append += " nat-forwarding-ipv4"
 
