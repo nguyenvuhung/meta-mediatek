@@ -1,77 +1,12 @@
-DESCRIPTION = "Packagegroup for qt5 image."
-MAINTAINER = "Diego Sueiro <diego.sueiro@embarcados.com.br>"
+# Copyright (C) 2014 O.S. Systems Software LTDA.
 
+DESCRIPTION = "Target packages for Qt5 SDK"
 LICENSE = "MIT"
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit packagegroup
 
-PACKAGES += "\
-            packagegroup-qt5-base \
-            packagegroup-qt5-fonts \
-            packagegroup-qt5-graphics \
-            packagegroup-qt5-extra \
-            packagegroup-qt5-extend \
-            "
-
-RDEPENDS_packagegroup-qt5-base = "\
-            qtbase \
-            qtbase-tools \
-            qtbase-plugins \
-            "
-
-RDEPENDS_packagegroup-qt5-fonts = "\
-            fontconfig \
-            fontconfig-utils \
-            ttf-bitstream-vera \
-            liberation-fonts \
-            "
-RDEPENDS_packagegroup-qt5-graphics ="\
-            qt3d \
-            qt3d-qmlplugins \
-            qt3d-tools \
-            qtdeclarative \
-            qtdeclarative-plugins \
-            qtdeclarative-qmlplugins \
-            qtdeclarative-tools \
-            qtgraphicaleffects-qmlplugins \
-            qtimageformats-plugins \
-            qtmultimedia \
-            qtmultimedia-plugins \
-            qtmultimedia-qmlplugins \
-            qtsvg \
-            qtsvg-plugins \
-            "            
-
-RDEPENDS_packagegroup-qt5-extra ="\
-			qttools \
-			qttools-plugins \
-			qttools-tools \
-            qtconnectivity \
-            qtconnectivity-qmlplugins \
-            qtenginio \
-            qtenginio-qmlplugins \
-            qtlocation \
-            qtlocation-plugins \
-            qtlocation-qmlplugins \
-            qtscript \
-            qtsensors \
-            qtsensors-plugins \
-            qtsensors-qmlplugins \
-            qtserialport \
-            qtsystems \
-            qtsystems-qmlplugins \
-            qtsystems-tools \
-            qtwebsockets \
-            qtwebsockets-qmlplugins \
-            qtxmlpatterns \
-            qtxmlpatterns-tools \
-            qtquickcontrols \
-            qtquickcontrols2 \
-            qtquickcontrols-qmlplugins \
-            qtdatavis3d \
-            qtgraphicaleffects \
-            qtimageformats \
-            "
+PACKAGEGROUP_DISABLE_COMPLEMENTARY = "1"
 
 # Requires Ruby to work
 USE_RUBY = " \
@@ -92,7 +27,8 @@ USE_X11 = " \
     qtx11extras-mkspecs \
 "
 
-RDEPENDS_packagegroup-qt5-extend = " \
+RDEPENDS_${PN} += " \
+    packagegroup-core-standalone-sdk-target \
     libsqlite3-dev \
     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'qt3d-dev', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'qt3d-mkspecs', '', d)} \
@@ -156,6 +92,7 @@ RDEPENDS_packagegroup-qt5-extend = " \
     qttools-mkspecs \
     qttools-staticdev \
     qttools-tools \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '${USE_WAYLAND}', '', d)} \
     ${USE_RUBY} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', '${USE_X11}', '', d)} \
     qtwebsockets-dev \
@@ -171,7 +108,19 @@ RDEPENDS_packagegroup-qt5-extend = " \
     qtquickcontrols2 \
     qtquickcontrols2-dev \
     qtquickcontrols2-mkspecs \
+    \
+    qmqtt-dev \
+    qmqtt-mkspecs \
     qtvirtualkeyboard \
-    qmqtt \
+    qtvirtualkeyboard-qmlplugins \
+"
+RDEPENDS_${PN}_remove_toolchain-clang_riscv32 = "qttools-dev qttools-mkspecs qttools-staticdev qttools-tools"
+RDEPENDS_${PN}_remove_toolchain-clang_riscv64 = "qttools-dev qttools-mkspecs qttools-staticdev qttools-tools"
+
+RRECOMMENDS_${PN} += " \
+    qtquickcontrols-qmlplugins \
+    qttools-plugins \
 "
 
+RRECOMMENDS_${PN}_remove_toolchain-clang_riscv32 = "qttools-plugins"
+RRECOMMENDS_${PN}_remove_toolchain-clang_riscv64 = "qttools-plugins"

@@ -125,7 +125,6 @@ FEATURES_NET = " \
 FEATURES_DHCP = " \
     dhcp-server \ 
     dhcp-relay \
-    dhcp-client \
     libfile-slurp-perl \
     libhtml-parser-perl \
     net-snmp \
