@@ -171,7 +171,5 @@ RDEPENDS_packagegroup-qt5-extend = " \
     qtquickcontrols2 \
     qtquickcontrols2-dev \
     qtquickcontrols2-mkspecs \
-    qtvirtualkeyboard \
-    qmqtt \
 "
 
