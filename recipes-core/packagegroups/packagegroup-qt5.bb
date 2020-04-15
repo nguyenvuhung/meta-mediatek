@@ -128,8 +128,6 @@ RDEPENDS_packagegroup-qt5-extend = " \
     qtlocation-plugins \
     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'qtlocation-qmlplugins', '', d)} \
     qttranslations-qtlocation \
-    qtmqtt-dev \
-    qtmqtt-mkspecs \
     qtmultimedia-dev \
     qtmultimedia-mkspecs \
     qtmultimedia-plugins \
